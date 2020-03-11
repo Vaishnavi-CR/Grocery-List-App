@@ -1,0 +1,33 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    
+   <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <div class="input-group width-class">
+                <input type="text" class="form-control" placeholder="enter grocery items" [(ngModel)]="groceryItem" name="grocery"/>
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" type="button" (click)="onClick()">
+        <span class="glyphicon glyphicon-ok"></span>
+        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <ul class="list-group">
+        <li *ngFor="let task of tasks" class="list-group-item width-class" >
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" value="" id="{{task.name}}" [(ngModel)]="task.isChecked" name="isActive">
+                <span class="form-check-label" for="exampleCheck1">{{ task.name }}</span>
+            </div>
+        </li>
+
+        <li *ngFor="let eachtask of cartService.tasks" class="list-group-item width-class" >
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" value="" id="{{eachtask.name}}" [(ngModel)]="eachtask.isChecked" name="isActive">
+                <span class="form-check-label" for="exampleCheck1">{{ eachtask.name }}</span>
+            </div>
+        </li>
+    </ul>
+    <button class="btn btn-primary">Push Items to Cart</button>
+ </form>
+ 

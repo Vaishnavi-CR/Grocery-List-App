@@ -1,0 +1,18 @@
+<span class="glyphicon glyphicon-shopping-cart" style="font-size: 28px;">Cart</span>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+  <ul class="list-group">
+       <li *ngFor="let item of cartService.Items" class="list-group-item width-class" >
+           <div class="form-check">
+               <input type="checkbox" class="form-check-input" value="" id="{{item.name}}" [(ngModel)]="item.isChecked" name="isActive">
+               <span class="form-check-label" for="exampleCheck1">{{ item.name }}</span>
+           </div>
+       </li>
+   </ul>
+   <br/>
+   <button class="btn btn-primary" type="button" (click)="onClickDelete()" name="delete">
+       Delete from Cart
+    </button>
+    &nbsp;
+    <button class="btn btn-primary">Send Back</button>
+
+   </form>
