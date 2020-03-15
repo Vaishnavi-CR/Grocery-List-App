@@ -20,15 +20,18 @@ export class AppCartComponent implements OnInit {
   }
   
   onClickDelete(){
-    this.cartService.Items = this.cartService.Items.filter(items=>items.isChecked === false)
+
+    this.cartService.delete()
   }
 
-  onSubmit(f: NgForm) {
+  onClickSendBack() {
 
-    let itemsToSend = this.cartService.Items.filter(task => task.isChecked === true)
-    this.cartService.Items = this.cartService.Items.filter(task => task.isChecked === false)
-    this.cartService.sendBack(itemsToSend)
- 
+    this.cartService.sendBack()
+  }
+  onClickCheckout() {
+    
+    this.cartService.checkout()
+
   }
 
     

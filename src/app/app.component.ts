@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { CartService } from './cart.service'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Grocery-List-App';
+  constructor(public cartService: CartService) {
+
+  }
 }

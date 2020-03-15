@@ -1,0 +1,14 @@
+
+<br/>
+<h4>Welcome to your Checkout page!</h4>
+<form>
+  <ul class="list-group">
+       <li *ngFor="let item of cartService.CheckedoutItems" class="list-group-item width-class" >
+           <div class="form-check">
+               <input type="checkbox" class="form-check-input" value="" id="{{item.name}}" [(ngModel)]="item.isChecked" name="isActive">
+               <span class="form-check-label" for="exampleCheck1">{{ item.name }} -  {{item.quantity}}</span>
+           </div>
+       </li>
+   </ul>
+   <br/>
+   </form>

@@ -23,67 +23,65 @@ export class AppGroceryComponent implements OnInit {
     name: "",
     id: 0
   };
-  itemQty: string;
-  tasks: ITask[] = [];
-  filteredItems: ITask[] = [];
-  cartItems: ITask[] = [];
+  //itemvalue: string;
+  itemQty: number;
   enteredItems: string[];
-  onClick() {
+  itemprice: number
+
+ onClick() {
+
     if (this.groceryItem.id == 0) {
-      this.enteredItems = this.tasks.map(val => val.name);
+      this.enteredItems = this.cartService.Grocery_Items.map(val => val.name)
       var result = this.enteredItems.filter (item => item == this.groceryItem.name)
 
-      if(result.length == 0)
+      if(result.length == 0 && this.groceryItem.name.trim() != '')
       
        {
-        this.tasks.push({
+        this.cartService.Grocery_Items.push({
           name: this.groceryItem.name,
           isChecked: false,
           quantity: this.itemQty,
-          id: new Date().getTime()
+          id: new Date().getTime(),
+          price: Number(this.itemprice * this.itemQty)
         });
       }
       else {
         
-        this.tasks.forEach(item => {
+        this.cartService.Grocery_Items.forEach(item => {
           
           if ( item.name == this.groceryItem.name) {
             item.quantity = +item.quantity + +this.itemQty
           }
            
         })
+
+        
       }
     }
     this.groceryItem = {
       name: "",
-      id: 0
+      id: 0,
+
     };
-    this.itemQty = "";
+    this.itemQty = 0;
+    this.itemprice = 0
   }
   onEdit(item) {
     this.groceryItem = item;
   }
 
   onDelete(item) {
-    for (var i = 0; i < this.tasks.length; i++) {
-      if (item.id == this.tasks[i].id) {
-        this.tasks.splice(i, 1);
+    for (var i = 0; i < this.cartService.Grocery_Items.length; i++) {
+      if (item.id == this.cartService.Grocery_Items[i].id) {
+        this.cartService.Grocery_Items.splice(i, 1);
         break;
       }
     }
   }
 
-  onSubmit(f: NgForm) {
-    this.filteredItems = this.tasks
-      .filter(task => task.isChecked === true)
-      .concat(this.cartService.tasks.filter(task => task.isChecked === true));
-    console.log("filtered items");
-    console.log(this.filteredItems);
-    this.tasks = this.tasks.filter(task => task.isChecked === false);
-    this.cartService.tasks = this.cartService.tasks.filter(
-      task => task.isChecked === false
-    );
+  onClickAddToCart() {
 
-    this.cartService.addToCart(this.filteredItems);
+    
+    this.cartService.addToCart();
   }
 }

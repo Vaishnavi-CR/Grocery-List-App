@@ -1,28 +1,35 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-  <div class="form-group">
-    <div class="col-xs-12">
-      <div class="input-group col-xs-4 pull-left">
+
+  <div>
+    <div class="col-xs-6">
+      <div class="input-group col-xs-3 pull-left">
         <input type="text" class="form-control" placeholder="Enter grocery items"
           [(ngModel)]="groceryItem.name" name="grocery"/>
+        
       </div>
-      <div class="dropdown col-xs-4 pull-left">
+      <div class="input-group col-xs-3 pull-left">
         <input type="text" class="form-control" placeholder="Enter quantity"
           [(ngModel)]="itemQty" name="quantity"/>
       </div> 
-      <div class="input-group-btn col-xs-4">
+      <div class="input-group col-xs-3 pull-left">
+        <input type="text" class="form-control" placeholder="Enter price per item in dollars"
+        [(ngModel)]="itemprice" name="price"/>
+      </div> 
+      <div class="input-group-btn col-xs-3">
         <button class="btn btn-primary" type="button" (click)="onClick()">
           <span class="glyphicon glyphicon-ok"></span>
+          
         </button>
+        
       </div>
 
       <br />
       <div class="col-xs-6" style="padding: 0px; margin-top: 10px;">
         <ul class="list-group">
-          <li *ngFor="let task of tasks" class="list-group-item">
+          <li *ngFor="let task of cartService.Grocery_Items" class="list-group-item">
             <div class="form-check">
               <input type="checkbox" class="form-check-input" value="" id="task.name" [(ngModel)]="task.isChecked" name="isActive"/>
               <span class="form-check-label" for="exampleCheck1">
-                  {{task.name}} - {{task.quantity}} 
+                  {{task.name}} - {{task.quantity}} - {{task.price}}
               </span>
               
                     <span (click)="onEdit(task)" class="glyphicon glyphicon-pencil floatright"></span>
@@ -32,30 +39,15 @@
             </div>
           </li>
 
-          <li
-            *ngFor="let eachtask of cartService.tasks"
-            class="list-group-item"
-          >
-            <div class="form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                value=""
-                id="{{ eachtask.name }}"
-                [(ngModel)]="eachtask.isChecked"
-                name="isActive"
-              />
-              <span class="form-check-label" for="exampleCheck1">{{
-                eachtask.name
-              }}</span>
-            </div>
-          </li>
+          
         </ul>
       </div>
     </div>
   </div>
-  <br />
+  <br/>
+  <br/>
+  <br/>
+  <br/>
   <div class="col-xs-12">
-    <button class="btn btn-primary">Push Items to Cart</button>
+    <button class="btn btn-primary" type="button" (click)="onClickAddToCart()" name="Checkout">Add To Cart</button>
   </div>
-</form>

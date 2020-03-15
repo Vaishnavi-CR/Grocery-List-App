@@ -6,24 +6,49 @@ import { ITask } from './itask';
 })
 export class CartService {
 
-  Items: ITask[] = [];
-  tasks: ITask[] = [];              
+  Grocery_Items: ITask[] = []; //local to groceryapp component
+  CartItems: ITask[] = []; //shared between groceryapp and cart components
+  CheckedoutItems: ITask[] = [];            
   constructor() { }
 
-   addToCart(itemsToAdd: ITask[]) {
-     //var items: ITask[] = JSON.parse(JSON.stringify(itemsToAdd));
-    itemsToAdd.forEach(item => {
+   addToCart() {
+
+    let filteredItems = this.Grocery_Items.filter(task => task.isChecked === true)
+      //.concat(this.cartService.SentItems.filter(task => task.isChecked === true));
+    
+    this.Grocery_Items = this.Grocery_Items.filter(task => task.isChecked === false);
+    // this.cartService.SentItems = this.cartService.SentItems.filter(
+    //   task => task.isChecked === false
+    // );
+
+    filteredItems.forEach(item => {
           
       item.isChecked=false
-      this.Items.push(item)
+      this.CartItems.push(item)
     
     });
  }
+ delete() {
+   this.CartItems = this.CartItems.filter(items=>items.isChecked === false)
+ }
+ sendBack() {
+  let filteredItems = this.CartItems.filter(task => task.isChecked === true)
+  this.CartItems = this.CartItems.filter(task => task.isChecked === false);
+  filteredItems.forEach(item => {
+          
+    item.isChecked=false
+    this.Grocery_Items.push(item)
+  
+  });
+ }
  
- sendBack(itemsToSend: ITask[]) {
-  itemsToSend.forEach(task=> {
-    task.isChecked=false
-    this.tasks.push(task)
+checkout() {
+
+  let filteredItems = this.CartItems.filter(task => task.isChecked === true)
+  this.CartItems = this.CartItems.filter(task => task.isChecked === false);
+  filteredItems.forEach(item => {
+    item.isChecked=false
+    this.CheckedoutItems.push(item)
   })
 }
     
