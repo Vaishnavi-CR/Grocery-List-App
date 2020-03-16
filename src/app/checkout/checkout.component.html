@@ -1,14 +1,130 @@
-
-<br/>
+<br />
 <h4>Welcome to your Checkout page!</h4>
-<form>
-  <ul class="list-group">
-       <li *ngFor="let item of cartService.CheckedoutItems" class="list-group-item width-class" >
-           <div class="form-check">
-               <input type="checkbox" class="form-check-input" value="" id="{{item.name}}" [(ngModel)]="item.isChecked" name="isActive">
-               <span class="form-check-label" for="exampleCheck1">{{ item.name }} -  {{item.quantity}}</span>
-           </div>
-       </li>
-   </ul>
-   <br/>
-   </form>
+
+<table>
+  <tr style="vertical-align: text-top;">
+    <td style="border: 1px solid black; width:33.3%;">
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Country</mat-label>
+          <input matInput disabled value="United States" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>First name</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Last Name</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Ex. 100 Main St" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Address 2</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="Ex. Redmond" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>State</mat-label>
+          <mat-select>
+            <mat-option
+              *ngFor="let state of states"
+              [value]="state.abbreviation"
+            >
+              {{ state.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Postal Code</mat-label>
+          <input
+            matInput
+            #postalCode
+            maxlength="5"
+            placeholder="Ex. 98052"
+            value=""
+          />
+          <mat-hint align="end">{{ postalCode.value.length }} / 5</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Telephone</mat-label>
+          <span matPrefix>+1 &nbsp;</span>
+          <input type="tel" matInput placeholder="555-555-1234" />
+        </mat-form-field>
+      </form>
+    </td>
+    <td style="border: 1px solid black; width:33.3%;">
+      <div style="text-align: center;">
+      <label id="example-radio-group-label">Payment</label>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="payments"
+      >
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let item of payment"
+          [value]="payment"
+        >
+          {{ item }}
+        </mat-radio-button>
+      </mat-radio-group>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Name on card</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Credit card number</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Expiration</mat-label>
+          <input matInput />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>CVV</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </form>
+    </div>
+    </td>
+    <td style="border: 1px solid black; width:33.3%;">
+      <form class="example-form">
+        <div style="padding-left: 33.3%;">
+        <button class="btn btn-primary" type="button">Place Your Order</button>
+      </div>
+      <br />
+      <p style="text-align: center; font-weight:bold">Items to Checkout</p>
+        <table id="checkout">
+          <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+          <tr *ngFor="let item of cartService.CheckedoutItems">
+            <td>{{item.name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.price}}</td>
+          </tr>
+        </table>
+      
+      
+        <br />
+      </form>
+      <br/>
+      <p>Total before tax: </p><span>{{cartService.checkoutbeforetax}}</span>
+      <p>Estimated tax to be collected: </p><span>{{cartService.addtax}}</span>
+      <p>Order total: </p><span>{{cartService.checkoutaftertax}}</span>
+
+    </td>
+  </tr>
+</table>
+
+

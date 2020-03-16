@@ -3,5 +3,9 @@
 #myCarousel.carousel.slide {
   width: 100%; 
   max-width: 800px;
+  max-height: 230px;
   
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

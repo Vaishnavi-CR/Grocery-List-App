@@ -70,14 +70,7 @@ export class AppGroceryComponent implements OnInit {
     this.groceryItem = item;
   }
 
-  onDelete(item) {
-    for (var i = 0; i < this.cartService.Grocery_Items.length; i++) {
-      if (item.id == this.cartService.Grocery_Items[i].id) {
-        this.cartService.Grocery_Items.splice(i, 1);
-        break;
-      }
-    }
-  }
+  
 
   onClickAddToCart() {
 
